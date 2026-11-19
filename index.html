@@ -1,104 +1,431 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IrisLin24 的个人主页</title>
-  <style>
-    :root {
-      font-family: system-ui, "Microsoft YaHei", sans-serif;
-      color: #143334;
-      background: #edf4f3;
-      line-height: 1.7;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IrisLin24: Personal Homepage</title>
+    <meta name="description" content="林啸堃的个人主页，研究方向为集成电路物理设计自动化，展示论文、专利和竞赛成果。" />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, "Microsoft YaHei", "PingFang SC", sans-serif;
+        color: #1b2925;
+        background: #f3f5ef;
+        line-height: 1.65;
+        --paper: #f3f5ef;
+        --ink: #192a24;
+        --muted: #515e55;
+        --line: #d6ddd3;
+        --accent: #dfec93;
+        --radius: 1.5rem;
+      }
 
-    body { margin: 0; }
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin: 0; }
+      a { color: inherit; }
+      a:focus-visible { outline: 2px solid #517546; outline-offset: 4px; }
+      h1, h2, h3, h4, p, ul { margin: 0; }
+      h1, h2, h3, h4 { line-height: 1.25; }
 
-    .page {
-      width: min(100% - 2.5rem, 48rem);
-      margin-inline: auto;
-    }
+      .page {
+        width: min(100% - 3.5rem, 72rem);
+        margin-inline: auto;
+      }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
-      padding-block: 1.25rem;
-      border-bottom: 1px solid #bbcfc9;
-    }
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        min-height: 5.5rem;
+        padding-block: 0.75rem;
+      }
 
-    a {
-      color: #245d58;
-      text-underline-offset: 0.25em;
-    }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
 
-    a:focus-visible {
-      outline: 2px solid #245d58;
-      outline-offset: 4px;
-    }
+      .brand::before {
+        width: 0.9rem;
+        height: 0.9rem;
+        border: 1px solid var(--ink);
+        border-radius: 50%;
+        background: var(--accent);
+        content: "";
+      }
 
-    header { padding-block: clamp(3rem, 10vw, 7rem); }
+      .topbar nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.15rem clamp(0.5rem, 2vw, 1.45rem);
+      }
 
-    h1, h2, h3 { line-height: 1.2; }
+      .topbar nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        padding-inline: 0.3rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      letter-spacing: -0.045em;
-    }
+      .topbar a:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.3em;
+      }
 
-    header p {
-      max-width: 34rem;
-      font-size: 1.125rem;
-      color: #3d5555;
-    }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: var(--ink);
+        color: #f7f9ef;
+      }
 
-    section {
-      padding-block: 1.5rem 2rem;
-      border-top: 1px solid #bbcfc9;
-    }
+      .hero-copy {
+        display: grid;
+        align-content: center;
+        justify-items: start;
+        min-height: 25rem;
+        padding: clamp(2rem, 5vw, 4.75rem);
+      }
 
-    h2 { margin-top: 0; }
+      .hero h1 {
+        display: grid;
+        gap: 0.4rem;
+      }
 
-    article {
-      padding: 1.25rem;
-      background: #fff;
-      border: 1px solid #ceded9;
-      border-radius: 0.75rem;
-    }
+      .greeting {
+        color: var(--accent);
+        font-family: Georgia, serif;
+        font-size: clamp(1.85rem, 3.5vw, 3.25rem);
+        font-style: italic;
+        font-weight: 400;
+      }
 
-    article h3 { margin: 0 0 0.5rem; }
-    article p { margin: 0; }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <nav aria-label="页面导航">
-      <a href="#about">关于我</a>
-      <a href="#projects">作品</a>
-      <a href="https://github.com/IrisLin24">GitHub</a>
-    </nav>
+      .display-name {
+        font-size: clamp(3.75rem, 10vw, 7.25rem);
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+      }
 
-    <main>
-      <header>
-        <!-- 可以把下面的用户名替换成想公开展示的名字或昵称。 -->
-        <h1>你好，我是 IrisLin24</h1>
-        <p>用一句话介绍你自己，比如你正在学习什么，或者喜欢做什么。</p>
+      .hero p {
+        max-width: 34ch;
+        margin-top: 1.35rem;
+        color: #dce4d9;
+        font-size: clamp(1rem, 1.8vw, 1.25rem);
+      }
+
+      .hero-art {
+        position: relative;
+        overflow: hidden;
+        background: #202837;
+      }
+
+      .hero-art img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 73% center;
+      }
+
+      .section {
+        margin-top: clamp(3.25rem, 7vw, 6rem);
+        scroll-margin-top: 1rem;
+      }
+
+      .section > h2 {
+        margin-bottom: 1.25rem;
+        font-size: clamp(1.8rem, 4vw, 2.75rem);
+        letter-spacing: -0.035em;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .panel {
+        min-width: 0;
+        padding: clamp(1.25rem, 3.5vw, 2.25rem);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fcfdf9;
+      }
+
+      .panel h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+
+      .education-list, .detail-list {
+        display: grid;
+        gap: 1.1rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .panel h3 + .education-list, .panel h3 + .detail-list { margin-top: 1.4rem; }
+
+      .education-list > li + li, .detail-list > li + li {
+        padding-top: 1.1rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .period {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: var(--muted);
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .school, .detail-list h4 {
+        font-size: 1.0625rem;
+        font-weight: 700;
+      }
+
+      .education-list p, .detail-list p {
+        margin-top: 0.28rem;
+        color: var(--muted);
+      }
+
+      .hero .research-focus {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.15rem 0.65rem;
+        max-width: none;
+        margin-top: 1.2rem;
+        color: var(--accent);
+        font-size: 1rem;
+      }
+
+      .research-entries {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .research-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+
+      .research-meta {
+        color: #426446;
+        font-size: 0.9375rem;
+        font-weight: 650;
+      }
+
+      .research-card h3 { overflow-wrap: anywhere; }
+      .research-authors, .research-description { color: var(--muted); }
+      .research-authors { font-size: 0.9375rem; }
+
+      .research-card a {
+        margin-top: auto;
+        padding-top: 0.25rem;
+        font-weight: 650;
+        text-underline-offset: 0.25em;
+      }
+
+      .research-card a:hover { color: #426446; }
+
+      footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 3rem;
+        padding-block: 1.25rem 2rem;
+        border-top: 1px solid var(--line);
+      }
+
+      footer a {
+        padding-block: 0.4rem;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        text-underline-offset: 0.25em;
+      }
+
+      @media (max-width: 46rem) {
+        .page { width: calc(100% - 2rem); }
+        .topbar { min-height: 4.5rem; }
+        .hero, .about-grid { grid-template-columns: 1fr; }
+        .hero-copy { min-height: auto; padding: 2.35rem 1.5rem 2.6rem; }
+        .hero-art { aspect-ratio: 10 / 7; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <header class="topbar">
+        <a class="brand" href="#top">IrisLin24</a>
+        <nav aria-label="页面导航">
+          <a href="#about">关于我</a>
+          <a href="#research">学术成果</a>
+          <a href="https://github.com/IrisLin24">GitHub</a>
+        </nav>
       </header>
 
-      <section id="about">
-        <h2>关于我</h2>
-        <p>在这里写两三句话，介绍你的兴趣、经历或最近在做的事。</p>
-      </section>
+      <main>
+        <section class="hero" aria-labelledby="intro">
+          <div class="hero-copy">
+            <h1 id="intro"><span class="greeting" lang="en">Hej, I'm</span> <span class="display-name">林啸堃</span></h1>
+            <p>技能点都点在了奇怪的地方，<br />非典型工科生，喜欢整活。</p>
+            <p class="research-focus"><strong>How hard can it be?</strong></p>
+          </div>
+          <div class="hero-art">
+            <img src="./pic/head_photo.jpg" width="3500" height="2450" alt="钢琴与小提琴演奏的插画" />
+          </div>
+        </section>
 
-      <section id="projects">
-        <h2>作品</h2>
-        <article>
-          <h3>你的第一个项目</h3>
-          <p>写下你做了什么、用到了什么，以及这个项目里你最想展示的部分。</p>
-        </article>
-      </section>
-    </main>
-  </div>
-</body>
+        <section class="section" id="about" aria-labelledby="about-title">
+          <h2 id="about-title">关于我</h2>
+          <div class="about-grid">
+            <section class="panel" aria-labelledby="education-title">
+              <h3 id="education-title">教育经历</h3>
+              <ul class="education-list">
+                <li>
+                  <span class="period">2020–2024</span>
+                  <div class="school">北京交通大学</div>
+                  <!-- <p>电子信息工程学院 · 电子科学与技术专业</p> -->
+                </li>
+                <li>
+                  <span class="period">2024 至今（截至 2026.11）</span>
+                  <div class="school">中国科学院计算技术研究所</div>
+                  <p>电子信息 · 专业硕士</p>
+                  <p>研究方向：集成电路物理设计自动化</p>
+                </li>
+              </ul>
+            </section>
+
+            <section class="panel" aria-labelledby="interests-title">
+              <h3 id="interests-title">个人爱好</h3>
+              <ul class="detail-list">
+                <li>
+                  <h4>体育</h4>
+                  <p>羽毛球、台球、F1、自行车</p>
+                </li>
+                <li>
+                  <h4>音乐</h4>
+                  <p>钢琴、编曲键盘、口琴</p>
+                </li>
+                <li>
+                  <h4>游戏</h4>
+                  <p>《CS2》、《欧洲卡车模拟2》等</p>
+                </li>
+                <li>
+                  <h4>其它</h4>
+                  <p>驾驶、摄影等</p>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </section>
+
+        <section class="section" id="skills" aria-labelledby="skills-title">
+          <h2 id="skills-title">个人技能</h2>
+          <div class="panel">
+              <p></p>OpenROAD、Cadence Innovus、Siemens Calibre、Vivado、Quartus Prime</p>
+              <p>C、C++、Python、Verilog</p>
+              <p>STM32、FPGA</p>
+              <p>Adobe Photoshop、Adobe Lightroom</p>
+          </div>
+        </section>
+
+        <section class="section" id="devices" aria-labelledby="devices-title">
+          <h2 id="devices-title">妙妙工具</h2>
+          <div class="panel">
+            <ul class="detail-list">
+              <li>
+                <h3>电脑</h3>
+                <p>机械革命 耀世15Pro 2025</p>
+              </li>
+              <li>
+                <h3>相机</h3>
+                <p>SONY Alpha 6400</p>
+              </li>
+              <li>
+                <h3>镜头</h3>
+                <p>SONY E PZ 16-50mm F3.5-5.6 OSS | SELP1650</p>
+                <p>SIGMA CONTEMPORARY 16-300mm F3.5-6.7 DC OS</p>
+                <p>SIGMA ART 17-40mm F1.8 DC</p>
+              </li>
+              <li>
+                <h3>乐器</h3>
+                <p>YAMAHA YDP-143WH</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section" id="research" aria-labelledby="research-title">
+          <h2 id="research-title">学术成果</h2>
+          <ul class="research-entries">
+            <li class="panel research-card">
+              <p class="research-meta">HPCA 2027 · 已接收</p>
+              <h3 lang="en">GNAR: Minimizing and Balancing Thermomechanical Stress for Multi-Chiplet Systems</h3>
+              <p class="research-authors" lang="en">
+                Ding Yuan, Yujie Wang, <strong>Xiaokun Lin</strong>, Meixuan Lu, Ying Wang, Yinhe Han, Yiming Gan
+              </p>
+              <p class="research-description">研究如何降低并均衡多芯粒系统中的热机械应力，利用特定容错设计方法以提高系统可靠性</p>
+            </li>
+
+            <li class="panel research-card">
+              <p class="research-meta">ASP-DAC 2027 · 已接收</p>
+              <h3 lang="en">PI-Aware Co-Layer Signal Routing and Power Plane Synthesis for Chiplet Interposers</h3>
+              <p class="research-authors" lang="en">
+                Jixiang Zhu, Yujie Wang, <strong>Xiaokun Lin</strong>, Lang Feng, Bailiang Zhang, Ying Wang, Yinhe Han
+              </p>
+              <p class="research-description">在芯粒中介层的同一物理层上协同规划和设计信号布线与电源平面</p>
+              <!-- <a href="https://easychair.org/smart-program/ASP-DAC2027/2027-01-28.html">会议日程与摘要</a> -->
+            </li>
+
+            <li class="panel research-card">
+              <p class="research-meta">ICEPT 2026 · 第一作者</p>
+              <h3 lang="en">CIT-Bench1.0: Open-Source Benchmark Suite for Chiplet-based Advanced Packaging</h3>
+              <p class="research-authors" lang="en">
+                <strong>Xiaokun Lin</strong>, Jixiang Zhu, Yujie Wang, Xiaoting Wang, Zhuolun Song, Zhixin Yue, Longxiang Yin, Ying Wang, Yinhe Han
+              </p>
+              <p class="research-description">构建面向芯粒（Chiplet）先进封装设计自动化的开源基准套件，涵盖封装规划、芯粒布局与凸点布局</p>
+              <a href="https://ieeexplore.ieee.org/document/11690286/">IEEE Xplore</a>
+            </li>
+
+            <li class="panel research-card">
+              <p class="research-meta">GLSVLSI 2026 · 第一作者</p>
+              <h3 lang="en">N for One: Reticle-Reuse-Driven Routing for Silicon Interposers</h3>
+              <p class="research-authors" lang="en">
+                <strong>Xiaokun Lin</strong>, Yujie Wang, Lang Feng, Jixiang Zhu, Xupengkai Lu, Ying Wang, Fengwei Dai, Yinhe Han
+              </p>
+              <p class="research-description">硅中介层布线工具 CIT-R3，同时优化掩模版复用目标与布线质量</p>
+              <a href="https://doi.org/10.1145/3787109.3815225">ACM Digital Library</a>
+            </li>
+
+            <li class="panel research-card">
+              <p class="research-meta">ISPD 2024 · Team SCAW</p>
+              <h3 lang="en">GPU/ML-Enhanced Large Scale Global Routing Contest</h3>
+              <p class="research-description">Honorable Mention</p>
+              <a href="https://ispd.cc/slides/2024/protected/16_1_slides_final.pdf">竞赛结果</a>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <a href="#top">回到顶部</a>
+      </footer>
+    </div>
+  </body>
 </html>
